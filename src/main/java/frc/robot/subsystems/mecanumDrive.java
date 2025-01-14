@@ -4,12 +4,26 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.Kinematics;
+import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
+import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ExampleSubsystem extends SubsystemBase {
+public class MecanumDrive extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public ExampleSubsystem() {}
+  public MecanumDrive() {}
+  private Translation2d fll = new Translation2d(1,2);
+  private Translation2d bll = new Translation2d(3,4);
+  private Translation2d frl = new Translation2d(5,6);
+  private Translation2d brl = new Translation2d(7,8);
+  MecanumDriveKinematics driveKinematics = new MecanumDriveKinematics(fll,frl,bll,brl);
+  ChassisSpeeds chassisSpeeds = new ChassisSpeeds(1,1,1);
+  MecanumDriveWheelSpeeds wheelSpeeds = driveKinematics.toWheelSpeeds(chassisSpeeds);
+  
 
   /**
    * Example command factory method.
