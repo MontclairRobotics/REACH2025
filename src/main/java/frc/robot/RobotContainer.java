@@ -30,13 +30,13 @@ public class RobotContainer {
       new CommandPS5Controller(OperatorConstants.kDriverControllerPort);
 
   private MecanumDrive mecanumDrive = new MecanumDrive();
+  private final Joystick joystick = new Joystick(0);
   public ChassisSpeeds speeds = new ChassisSpeeds();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    mecanumDrive.setDefaultCommand(mecanumDrive.driveDefault(m_driverController));
     
   }
 
@@ -50,6 +50,8 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    new edu.wpi.first.wpilibj2.command.button.JoystickButton(joystick, 1)
+    .whileTrue(edu.wpi.first.wpilibj2.command.Commands.run(() -> mecanumDrive.drive(speeds), mecanumDrive));
   }
 
   /**
