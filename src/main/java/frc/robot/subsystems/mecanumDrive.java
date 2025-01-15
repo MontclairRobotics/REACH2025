@@ -12,6 +12,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 
@@ -62,11 +63,15 @@ public class MecanumDrive extends SubsystemBase {
   }
   public void driveFromController(CommandPS5Controller controller) {
     // Query some boolean state, such as a digital sensor.
-    double xSpeed = controller.getLeftX();
-    double ySpeed = -controller.getLeftY();
-    double turnSpeed = controller.getRightX();
+    double xSpeed = MaxSpeed*(controller.getLeftX());
+    double ySpeed = MaxSpeed*(-controller.getLeftY());
+    double turnSpeed = MaxSpeed*(controller.getRightX());
     drive(new ChassisSpeeds(xSpeed,ySpeed,turnSpeed));
 
+  }
+
+  public Command driveDefault(CommandPS5Controller controller){
+    return Commands.run(() -> driveFromController(controller));
   }
 
   @Override

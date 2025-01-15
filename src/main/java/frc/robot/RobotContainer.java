@@ -34,7 +34,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    drive.setDefaultCommand(drive.driveFromController(m_driverController));
+    drive.setDefaultCommand(drive.driveDefault(m_driverController));
     
   }
 
